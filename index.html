@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Unbeatable Tic Tac Toe</title>
+	<!-- CSS File -->
+	<link rel="stylesheet" href="style.css">
+	<!-- Bootstrap Files -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+	<!-- Background Music -->
+	<audio autoplay loop>
+		<source src="files/background_music.mp3" type="audio/mpeg">Your browser does not support the <code>audio</code> element.</audio>
+</head>
+<body>
+	<div>
+		<!-- Game Name -->
+		<p class="h11">𝓤𝓷𝓫𝓮𝓪𝓽𝓪𝓫𝓵𝓮 - 𝓣𝓲𝓬 𝓣𝓪𝓬 𝓣𝓸𝓮 𝓖𝓪𝓶𝓮</p>
+		<!-- Mute Button -->
+		<img id="mute" onclick="stopAudio()" src="files/volume.png" class="img-fluid float-right" height="" width="" alt="Responsive image">
+		<!-- Tic Tac Toe Table -->
+		<table class="table">
+			<tr>
+				<th scope="col" class="tictactoe" id="0"></th>
+				<th scope="col" class="tictactoe" id="1"></th>
+				<th scope="col" class="tictactoe" id="2"></th>
+			</tr>
+			<tr>
+				<th scope="col" class="tictactoe" id="3"></th>
+				<th scope="col" class="tictactoe" id="4"></th>
+				<th scope="col" class="tictactoe" id="5"></th>
+			</tr>
+			<tr>
+				<th scope="col" class="tictactoe" id="6"></th>
+				<th scope="col" class="tictactoe" id="7"></th>
+				<th scope="col" class="tictactoe" id="8"></th>
+			</tr>
+		</table>
+		<div class="gameOverDiv">
+			<div class="text"></div>
+		</div>
+		<h2> Background Photos from  <a href="https://pngtree.com/freebackground/pure-star-banner-creative-background_142047.html">pngtree.com</a></h2>
+		<!-- Replay Game Button -->
+		<div class="text-center">
+			<button class="btn btn-primary btn-lg playbutton" id="restartButton" onClick="startGameFunction(); PlaySound()">Replay</button>
+		</div>
+	</div>
+	<!-- JavaScript File -->
+	<script src="style.js"></script>
+	<!-- Bootstrap JavaScript File -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</body>
+
+</html>

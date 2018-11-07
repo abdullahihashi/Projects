@@ -1,7 +1,7 @@
 const columnVaraible = document.querySelectorAll('.tictactoe');
 startGameFunction();
 // Winning Possibilities
-var tableBoard;
+let tableBoard;
 const humanPlayer = 'O';
 const computerPlayer = 'X';
 const winningPossibilities = [
@@ -19,7 +19,7 @@ const winningPossibilities = [
 function startGameFunction() {
 	document.querySelector(".gameOverDiv").style.display = "none";
 	tableBoard = Array.from(Array(9).keys());
-	for (var i = 0; i < columnVaraible.length; i++) {
+	for (let i = 0; i < columnVaraible.length; i++) {
 		columnVaraible[i].innerText = '';
 		columnVaraible[i].style.removeProperty('background-color');
 		columnVaraible[i].addEventListener('click', turnClickFunction, false);
@@ -48,10 +48,10 @@ function checkWinnerFunction(varboard, player) {
 	let plays = varboard.reduce((a, e, i) => (e === player) ? a.concat(i) : a, []);
 	let gameWon = null;
 	for (let [index, win] of winningPossibilities.entries()) {
-		if (win.every(elem => plays.indexOf(elem) > -1)) {
+		if (win.every(elem => plays.includes(elem))) {
 			gameWon = {
-				index: index,
-				player: player
+				index,
+				player
 			};
 			break;
 		}
@@ -64,7 +64,7 @@ function gameOver(gameWon) {
 	for (let index of winningPossibilities[gameWon.index]) {
 		document.getElementById(index).style.backgroundColor = gameWon.player == humanPlayer ? "blue" : "red";
 	}
-	for (var i = 0; i < columnVaraible.length; i++) {
+	for (let i = 0; i < columnVaraible.length; i++) {
 		columnVaraible[i].removeEventListener('click', turnClickFunction, false);
 	}
 	declareWinnerFunction(gameWon.player == humanPlayer ? "Winner" : "You Lose");
@@ -76,7 +76,7 @@ function declareWinnerFunction(who) {
 	document.querySelector(".gameOverDiv").style.display = "block";
 	document.querySelector(".gameOverDiv .text").innerText = who;
 	// Game Over Sound
-	var over = new Audio();
+	const over = new Audio();
 	over.src = "files/GameOver.mp3";
 	over.play();
 }
@@ -93,7 +93,7 @@ function bestSpotFunction() {
 // Check If Game ended Tie
 function checkTieFunction() {
 	if (emptyColumnsFunction().length == 0) {
-		for (var i = 0; i < columnVaraible.length; i++) {
+		for (let i = 0; i < columnVaraible.length; i++) {
 			columnVaraible[i].removeEventListener('click', turnClickFunction, false);
 		}
 		document.getElementById("restartButton").style.visibility = "visible";
@@ -105,7 +105,7 @@ function checkTieFunction() {
 
 // Minimax Algorithm Function
 function minimaxAlgorithm(newBoard, player) {
-	var availSpots = emptyColumnsFunction();
+	const availSpots = emptyColumnsFunction();
 	if (checkWinnerFunction(newBoard, humanPlayer)) {
 		return {
 			score: -10
@@ -119,33 +119,33 @@ function minimaxAlgorithm(newBoard, player) {
 			score: 0
 		};
 	}
-	var moves = [];
-	for (var i = 0; i < availSpots.length; i++) {
-		var move = {};
+	const moves = [];
+	for (let i = 0; i < availSpots.length; i++) {
+		const move = {};
 		move.index = newBoard[availSpots[i]];
 		newBoard[availSpots[i]] = player;
 		if (player == computerPlayer) {
-			var result = minimaxAlgorithm(newBoard, humanPlayer);
+			let result = minimaxAlgorithm(newBoard, humanPlayer);
 			move.score = result.score;
 		} else {
-			var result = minimaxAlgorithm(newBoard, computerPlayer);
+			let result = minimaxAlgorithm(newBoard, computerPlayer);
 			move.score = result.score;
 		}
 		newBoard[availSpots[i]] = move.index;
 		moves.push(move);
 	}
-	var bestMoveFunction;
+	let bestMoveFunction;
 	if (player === computerPlayer) {
-		var bestScore = -10000;
-		for (var i = 0; i < moves.length; i++) {
+		let bestScore = -10000;
+		for (let i = 0; i < moves.length; i++) {
 			if (moves[i].score > bestScore) {
 				bestScore = moves[i].score;
 				bestMoveFunction = i;
 			}
 		}
 	} else {
-		var bestScore = 10000;
-		for (var i = 0; i < moves.length; i++) {
+		let bestScore = 10000;
+		for (let i = 0; i < moves.length; i++) {
 			if (moves[i].score < bestScore) {
 				bestScore = moves[i].score;
 				bestMoveFunction = i;
@@ -156,7 +156,7 @@ function minimaxAlgorithm(newBoard, player) {
 }
 
 // Background Music Play
-var bleep = new Audio();
+let bleep = new Audio();
 bleep.src = "files/background_music.mp3";
 bleep.loop = true
 
@@ -164,14 +164,14 @@ bleep.loop = true
 function PlaySound() {
 	bleep.play();
 }
-var bleep = new Audio();
+let bleep = new Audio();
 bleep.src = "files/bleep.wav";
 
 // Stop Audio
 function stopAudio() {
-	var media = document.getElementsByTagName('audio'),
-		i = media.length;
-	while (i--) {
+    let media = document.getElementsByTagName('audio');
+    let i = media.length;
+    while (i--) {
 		media[i].volume = 0;
 	}
 }
